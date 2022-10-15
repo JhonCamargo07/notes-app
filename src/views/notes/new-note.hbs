@@ -1,12 +1,23 @@
 <div class='mt-4 mx-auto'>
+	{{#if note}}
+	<form action='/notes/update/{{note._id}}?_method=PUT' method='POST'>
+	<input type="hidden" name="_method" value="PUT">
+	{{else}}
 	<form action='/notes/new-note' method='POST'>
+	{{/if}}
 		<div class='mb-3'>
 			<label for='title' class='form-label'>Title</label>
-			<input type='text' class='form-control' name='title' id='title' aria-describedby='emailHelp' />
+			<input type='text' value='{{note.title}}' class='form-control' name='title' id='title' aria-describedby='emailHelp' />
 		</div>
 		<div class='mb-3'>
 			<label for='description' class='form-label'>Note</label>
-			<textarea name='description' id='description' placeholder='Description' class='form-control' rows='5'></textarea>
+			<textarea
+				name='description'
+				id='description'
+				placeholder='Description'
+				class='form-control'
+				rows='5'
+			>{{note.description}}</textarea>
 		</div>
 		<div class='text-center'>
 			<button type='submit' class='btn btn-primary px-5'>Save</button>

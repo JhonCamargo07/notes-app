@@ -20,10 +20,10 @@ router.get('/notes', renderNotes);
 
 // Edit note
 router.get('/notes/edit/:id', renderEditForm);
-router.put('/notes/edit/:id', updateNote);
+router.put('/notes/update/:id', updateNote);
 
 // Delete note
-router.get('/notes/delete/:id', renderDeleteForm);
+// router.get('/notes/delete/:id', renderDeleteForm);
 router.delete('/notes/delete/:id', deleteNote);
 
 module.exports = router;

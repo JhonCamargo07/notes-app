@@ -1,6 +1,6 @@
-<div class='row mt-5'>
+<div class='row my-3'>
 	{{#each notes}}
-		<div class='col-md-3'>
+		<div class='col-md-4 col-lg-3 my-2'>
 			<div class='card'>
 				<div class='card-body'>
 					<h4 class='card-title d-flex justify-content-between align-items-center'>
@@ -10,7 +10,8 @@
 						</a>
 					</h4>
 					<p>{{description}}</p>
-					<form action='/notes/delete/{{_id}}' method='POST' class='text-center'>
+					<form action='/notes/delete/{{_id}}?_method=DELETE' method='POST' class='text-center'>
+						<input type='hidden' name='_method' value='DELETE' />
 						<button type='submit' class='btn btn-danger btn-block btn-sm'>Delete</button>
 					</form>
 				</div>
