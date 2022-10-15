@@ -1,7 +1,10 @@
 const express = require('express');
 const colors = require('colors');
 const { join } = require('path');
+const handlebars = require('handlebars');
 const { engine } = require('express-handlebars');
+const morgan = require('morgan');
+
 const app = express();
 
 // Settings
@@ -12,6 +15,7 @@ app.engine(
 	'.hbs',
 	engine({
 		defaultLayout: 'main',
+		// handlebars: allowInsecurePrototypeAccess(Handlebars),
 		layoutsDir: join(app.get('views'), 'layouts'),
 		partialsDir: join(app.get('views'), 'partials'),
 		extname: '.hbs',
@@ -21,21 +25,14 @@ app.engine(
 app.set('view engine', '.hbs');
 
 // Middlewares
+app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 
 //  Global variables
 
 // Routes
-app.get('/', (req, res) => {
-	res.render('index');
-});
-
-app.get('/about', (req, res) => {
-	res.render('about', {
-		// layout: false,
-		title: 'Home',
-	});
-});
+app.use(require('./routes/index.routes'));
+app.use(require('./routes/notes.routes'));
 
 // Static files
 app.use(express.static(join(__dirname, 'public')));
