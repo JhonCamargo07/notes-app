@@ -22,23 +22,32 @@
 				</li>
 			</ul>
 			<ul class='navbar-nav ml-auto mb-2 mb-lg-0'>
-				<li class='nav-item dropdown'>
-					<a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-						Notes
-					</a>
-					<ul class='dropdown-menu'>
-						<li><a class='dropdown-item' href='/notes'>All notes</a></li>
-						<li><a class='dropdown-item' href='/notes/add'>New note</a></li>
-						<li><hr class='dropdown-divider' /></li>
-						<li><a class='dropdown-item' href='#'>Logout</a></li>
-					</ul>
-				</li>
-				<li class='nav-item'>
-					<a class='nav-link active' aria-current='page' href='#'>Login</a>
-				</li>
-				<li class='nav-item'>
-					<a class='nav-link' href='#'>Register</a>
-				</li>
+				{{#if user}}
+					<li class='nav-item dropdown'>
+						<a
+							class='nav-link dropdown-toggle'
+							href='#'
+							role='button'
+							data-bs-toggle='dropdown'
+							aria-expanded='false'
+						>
+							Notes
+						</a>
+						<ul class='dropdown-menu'>
+							<li><a class='dropdown-item' href='/notes'>All notes</a></li>
+							<li><a class='dropdown-item' href='/notes/add'>New note</a></li>
+							<li><hr class='dropdown-divider' /></li>
+							<li><a class='dropdown-item' href='/logout'>Logout</a></li>
+						</ul>
+					</li>
+				{{else}}
+					<li class='nav-item'>
+						<a class='nav-link active' aria-current='page' href='/signin'>Login</a>
+					</li>
+					<li class='nav-item'>
+						<a class='nav-link' href='/signup'>Register</a>
+					</li>
+				{{/if}}
 			</ul>
 		</div>
 	</div>

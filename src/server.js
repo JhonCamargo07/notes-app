@@ -7,8 +7,11 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 
+// Initializations
 const app = express();
+require('./config/passport');
 
 // Settings
 app.set('nameProject', 'Notes app');
@@ -39,16 +42,25 @@ app.use(
 	})
 );
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //  Global variables
 app.use((req, res, next) => {
-	res.locals.success_mgs = req.flash('success_mgs');
+	res.locals.user = req.user || null;
+	res.locals.error = req.flash('error');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.name = req.flash('name');
+	res.locals.email = req.flash('email');
+	res.locals.password = req.flash('password');
 	next();
 });
 
 // Routes
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/notes.routes'));
+app.use(require('./routes/users.routes'));
 
 // Static files
 app.use(express.static(join(__dirname, 'public')));

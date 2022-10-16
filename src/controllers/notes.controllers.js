@@ -12,7 +12,7 @@ notesCtrl.createNewNote = async (req, res) => {
 	const { title, description } = req.body;
 	const newNote = new Note({ title, description });
 	await newNote.save();
-	req.flash('success_mgs', 'Note added successfully');
+	req.flash('success_msg', 'Note added successfully');
 	res.redirect('/notes');
 };
 
@@ -40,7 +40,7 @@ notesCtrl.renderEditForm = async (req, res) => {
 notesCtrl.updateNote = async (req, res) => {
 	const { title, description } = req.body;
 	await Note.findByIdAndUpdate(req.params.id, { title, description });
-	req.flash('success_mgs', 'Note updated successfully');
+	req.flash('success_msg', 'Note updated successfully');
 	res.redirect('/notes', 200, {
 		title: 'All notes',
 	});
@@ -49,7 +49,7 @@ notesCtrl.updateNote = async (req, res) => {
 //  Delete
 notesCtrl.deleteNote = async (req, res) => {
 	await Note.findByIdAndDelete({ _id: req.params.id });
-	req.flash('success_mgs', 'Note deleted successfully');
+	req.flash('success_msg', 'Note deleted successfully');
 	res.redirect('/notes', 200, {
 		title: 'All notes',
 	});
