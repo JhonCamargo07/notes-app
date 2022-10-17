@@ -9,7 +9,11 @@ const {
 	deleteNote,
 } = require('./../controllers/notes.controllers');
 
+const { isAuthenticated } = require('./../helpes/auth');
+
 const router = Router();
+
+router.use(isAuthenticated);
 
 // New notes
 router.get('/notes/add', renderNoteForm);
